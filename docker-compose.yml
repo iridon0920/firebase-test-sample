@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  node:
+    build: ./
+    volumes:
+      - ./:/app:cached
+      - ~/.bashrc:/root/.bashrc
+      - ~/.ssh:/root/.ssh
+      - ~/.gitconfig:/root/.gitconfig
+    ports:
+      - 4000:4000 # firebase emulators suite
+      - 8080:8080 # firestore emulator
+      - 5000:5000 # firebase hosting client
+      - 8085:8085 # pubsub emulator
+      - 9005:9005 # firebase login
+    working_dir: /app
+    tty: true
