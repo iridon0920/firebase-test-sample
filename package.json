@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^8.0.2",
-    "firebase-admin": "^9.4.1"
+    "firebase-admin": "^9.4.1",
+    "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^1.1.1",

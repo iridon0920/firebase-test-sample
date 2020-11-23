@@ -8,7 +8,8 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "test": "jest"
   },
   "engines": {
     "node": "12"
@@ -24,7 +25,10 @@
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.22.0",
     "typescript": "^3.8.0",
-    "firebase-functions-test": "^0.2.0"
+    "firebase-functions-test": "^0.2.3",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "@types/jest": "^26.0.15"
   },
   "private": true
 }
