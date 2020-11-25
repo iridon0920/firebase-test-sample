@@ -1,9 +1,5 @@
 import * as firebase from "@firebase/rules-unit-testing";
-import {
-  ReadPublicUser,
-  ReadPrivateUser,
-  User,
-} from "../../functions/src/dto/user";
+import { ReadPublicUser, ReadPrivateUser, User } from "../dto/user";
 
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 

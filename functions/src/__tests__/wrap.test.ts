@@ -1,12 +1,8 @@
 import * as firebase from "@firebase/rules-unit-testing";
 import functions from "firebase-functions-test";
 import * as admin from "firebase-admin";
-import { onCreateUser } from "../src/onCreateUser";
-import {
-  ReadPrivateUser,
-  ReadPublicUser,
-  User,
-} from "../../functions/src/dto/user";
+import { onCreateUser } from "../onCreateUser";
+import { ReadPrivateUser, ReadPublicUser, User } from "../dto/user";
 
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
