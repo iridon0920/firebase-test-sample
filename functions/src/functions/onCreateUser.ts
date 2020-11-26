@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { ReadPrivateUser, ReadPublicUser, User } from "./dto/user";
+import { ReadPrivateUser, ReadPublicUser, User } from "../dto/user";
 
 export const onCreateUser = functions
   .region("asia-northeast1")
@@ -15,25 +15,24 @@ export const onCreateUser = functions
       likeCount: data.likeCount,
     };
 
-    const privateUser: ReadPrivateUser = {
-      id: user.id,
-      email: user.email,
-      address: user.address,
-    };
-
-    const publicUser: ReadPublicUser = {
-      id: user.id,
-      name: user.name,
-      likeCount: user.likeCount,
-    };
-
     return admin
       .firestore()
       .runTransaction(async (transaction) => {
+        const privateUser: ReadPrivateUser = {
+          id: user.id,
+          email: user.email,
+          address: user.address,
+        };
         await transaction.set(
           admin.firestore().collection("read_private_users").doc(user.id),
           privateUser
         );
+
+        const publicUser: ReadPublicUser = {
+          id: user.id,
+          name: user.name,
+          likeCount: user.likeCount,
+        };
         await transaction.set(
           admin.firestore().collection("read_public_users").doc(user.id),
           publicUser

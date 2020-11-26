@@ -1,5 +1,5 @@
 import * as firebase from "@firebase/rules-unit-testing";
-import { ReadPublicUser, ReadPrivateUser, User } from "../dto/user";
+import { ReadPublicUser, ReadPrivateUser, User } from "../../dto/user";
 
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
@@ -31,18 +31,6 @@ describe("ユーザ書き込み", () => {
       likeCount: 10,
     };
 
-    const expectPrivateUser: ReadPrivateUser = {
-      id: user.id,
-      email: user.email,
-      address: user.address,
-    };
-
-    const expectPublicUser: ReadPublicUser = {
-      id: user.id,
-      name: user.name,
-      likeCount: user.likeCount,
-    };
-
     await firestore.collection("users").doc(user.id).set(user);
 
     await new Promise((resolve) => {
@@ -51,6 +39,11 @@ describe("ユーザ書き込み", () => {
         .doc(user.id)
         .onSnapshot((snap) => {
           if (snap.exists) {
+            const expectPrivateUser: ReadPrivateUser = {
+              id: user.id,
+              email: user.email,
+              address: user.address,
+            };
             expect(snap.data()).toEqual(expectPrivateUser);
             resolve();
           }
@@ -64,6 +57,11 @@ describe("ユーザ書き込み", () => {
         .doc(user.id)
         .onSnapshot((snap) => {
           if (snap.exists) {
+            const expectPublicUser: ReadPublicUser = {
+              id: user.id,
+              name: user.name,
+              likeCount: user.likeCount,
+            };
             expect(snap.data()).toEqual(expectPublicUser);
             resolve();
           }
