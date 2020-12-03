@@ -11,8 +11,7 @@ services:
     ports:
       - 4000:4000 # firebase emulators suite
       - 8080:8080 # firestore emulator
-      - 5000:5000 # firebase hosting client
-      - 8085:8085 # pubsub emulator
+      - 5001:5001 # functions emulator
       - 9005:9005 # firebase login
     working_dir: /app
     tty: true
