@@ -30,8 +30,8 @@ describe("firestore セキュリティルールテスト", () => {
       const ref = firestore.collection("users").doc("user");
       await firebase.assertSucceeds(ref.set({ name: "サンプル" }));
 
-      const failsRef = firestore.collection("users").doc("userB");
-      await firebase.assertFails(failsRef.set({ name: "サンプル" }));
+      const otherUserRef = firestore.collection("users").doc("userB");
+      await firebase.assertFails(otherUserRef.set({ name: "サンプル" }));
     });
 
     test("read_private_usersのデータは、ユーザ本人のみ読み込み可能", async () => {
@@ -39,8 +39,10 @@ describe("firestore セキュリティルールテスト", () => {
       const ref = firestore.collection("read_private_users").doc("user");
       await firebase.assertSucceeds(ref.get());
 
-      const failsRef = firestore.collection("read_private_users").doc("userB");
-      await firebase.assertFails(failsRef.get());
+      const otherUserRef = firestore
+        .collection("read_private_users")
+        .doc("userB");
+      await firebase.assertFails(otherUserRef.get());
     });
 
     test("read_public_usersのデータは、認証済ユーザは誰でも閲覧可能", async () => {
@@ -48,8 +50,10 @@ describe("firestore セキュリティルールテスト", () => {
       const ref = firestore.collection("read_public_users").doc("user");
       await firebase.assertSucceeds(ref.get());
 
-      const failsRef = firestore.collection("read_public_users").doc("userB");
-      await firebase.assertSucceeds(failsRef.get());
+      const otherUserRef = firestore
+        .collection("read_public_users")
+        .doc("userB");
+      await firebase.assertSucceeds(otherUserRef.get());
     });
   });
 });
