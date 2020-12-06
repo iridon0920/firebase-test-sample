@@ -1,5 +1,5 @@
 import * as firebase from "@firebase/rules-unit-testing";
-import { ReadPublicUser, ReadPrivateUser, User } from "../../dto/user";
+import { ReadPublicUser, ReadPrivateUser, WriteUser } from "../../dto/user";
 
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
@@ -23,7 +23,7 @@ describe("ユーザ書き込み", () => {
   });
 
   test("ユーザ作成時、公開用/非公開用の読み込み用ユーザが作成される", async () => {
-    const user: User = {
+    const user: WriteUser = {
       id: "test",
       name: "テストユーザ",
       email: "test@example.com",
